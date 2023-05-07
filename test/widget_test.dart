@@ -15,7 +15,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     var dark =CashHelper.getbool(key: 'dark');
-    await tester.pumpWidget( MyApp(dark: dark,));
+    await tester.pumpWidget( MyApp(isDark: dark,));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

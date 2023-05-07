@@ -16,21 +16,21 @@ class homeCubit extends Cubit<NewsStates>{
   List <dynamic> search=[];
   bool dark=false;
   void lightness({bool? fromShared}){
-    if(dark==true){
-      dark=false;
-      CashHelper.putBool(key: 'dark', value: dark!).then((value) {
-        emit(LightnessState());
-        print(dark);
+    emit(NewsInitialState());
+    if (fromShared != null)
+    {
+      dark = fromShared;
+      emit(LightnessState());
+    } else
+    {
+      dark = !dark;
+      CashHelper.putBool(key: 'dark', value: dark).then((value) {
+        emit(LightnessPlusState());
       });
     }
-    else{
-      dark=true;
-      CashHelper.putBool(key: 'dark', value: dark!).then((value) {
-        emit(LightnessState());
-        print(dark);
-      });
-    }
+    print(dark);
   }
+
   void bottomNavigationBar(int index){
    currantIndex=index;
    emit(bottomNavigationBarState());

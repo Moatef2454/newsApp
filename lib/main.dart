@@ -6,6 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:news/layout/news_home/cubit/cubit.dart';
 import 'package:news/modules/news_app_screens/business_screen.dart';
 import 'package:news/shear/bloc_observer/bloc_obsorver.dart';
+import 'package:news/shear/network/app_cubit/cubit.dart';
+import 'package:news/shear/network/app_cubit/states.dart';
 import 'package:news/shear/network/local/cash_helper.dart';
 import 'package:news/shear/network/remote/dio_helper.dart';
 
@@ -17,23 +19,23 @@ WidgetsFlutterBinding.ensureInitialized();
 DioHelper.init();
 await CashHelper.int();
 Bloc.observer=SimpleBlocObserver();
-var dark = CashHelper.getbool(key: 'dark');
-  runApp(MyApp(dark: dark,));
+var dark = CashHelper.getbool(key: 'isDark');
+  runApp(MyApp( isDark: dark,));
 }
 
 class MyApp extends StatelessWidget {
-  final dark;
-  MyApp({super.key, required this.dark});
+  final bool? isDark;
+  MyApp({super.key,  this.isDark});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => homeCubit()),
+            create: (context) => appCubit()..lightness(fromShared: isDark)),
         BlocProvider(
-            create: (context) => homeCubit()..getBusinessNews(),),
+            create: (context) => homeCubit()..getBusinessNews()..lightness(fromShared: isDark),),
       ],
-      child: BlocConsumer<homeCubit,NewsStates>(
+      child: BlocConsumer<appCubit,appStates>(
         listener: (BuildContext context, state) {  },
         builder: (BuildContext context, Object? state) =>MaterialApp(
           title: 'Flutter Demo',
@@ -76,7 +78,7 @@ class MyApp extends StatelessWidget {
               )
             )
           ),
-          themeMode: homeCubit.get(context).dark!?ThemeMode.dark:ThemeMode.light,
+          themeMode: appCubit.get(context).isDark?ThemeMode.dark:ThemeMode.light,
           debugShowCheckedModeBanner: false,
           home:homeScreen(),
         ),

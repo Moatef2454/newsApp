@@ -16,3 +16,4 @@ class SearchNewsLoadingState extends NewsStates{}
 class SearchNewsSuccessState extends NewsStates{}
 class SearchNewsErrorState extends NewsStates{}
 class LightnessState extends NewsStates{}
+class LightnessPlusState extends NewsStates{}
