@@ -60,7 +60,7 @@ class homeScreen extends StatelessWidget {
                 iconSize: 20,
                   onPressed: () {
                     appCubit.get(context).lightness();
-              }, icon:  Icon(Icons.light_mode),),
+              }, icon:  appCubit.get(context).lightnessIcon!,),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

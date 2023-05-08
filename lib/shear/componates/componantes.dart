@@ -62,3 +62,4 @@ Widget? NewsItemBuilder(article,context)=>InkWell(
     ),
   ),
 );
+Widget lightnessIcon=Icon(Icons.nightlight_outlined);

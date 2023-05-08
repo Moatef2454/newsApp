@@ -60,11 +60,11 @@ class MyApp extends StatelessWidget {
 
           ),
           darkTheme: ThemeData(
-              primarySwatch: Colors.amber,
+              primarySwatch: Colors.cyan,
               appBarTheme: AppBarTheme(
               color: HexColor('333739'),
                 elevation: 0,
-                iconTheme: IconThemeData(color: Colors.amber),
+                iconTheme: IconThemeData(color: Colors.cyan),
                 titleTextStyle: TextStyle(color: Colors.white70,fontSize: 20)
             ),
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
